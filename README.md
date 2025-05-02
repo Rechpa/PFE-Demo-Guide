@@ -155,11 +155,13 @@ You can simply enable hubble using the cilium CLI and then retype the status com
 
 `cilium hubble enable`
 
+`cilium hubble enable --ui`
+
 `cilium status --wait`
 
 To access the hubble UI, you can either port forward or simply use this command
 
-`cilium hubble cli`
+`cilium hubble ui`
 
 
 
