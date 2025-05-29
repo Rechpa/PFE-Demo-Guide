@@ -113,6 +113,8 @@ In this section, we will need to install the argoCD tool and access its UI
 
 `kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml`
 
+OR INSTALL USING HELM CHART 
+
 ### Port Forwarding 
 
 `kubectl port-forward svc/argocd-server -n argocd 8080:443`
