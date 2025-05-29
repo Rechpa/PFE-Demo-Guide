@@ -172,7 +172,9 @@ You can simply enable hubble using the cilium CLI and then retype the status com
 To access the hubble UI, 
 
 `cilium hubble disable`
+
 `cilium hubble enable --ui`
+
 `cilium hubble ui`
 
 
