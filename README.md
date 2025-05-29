@@ -127,6 +127,15 @@ In this section, we will need to install the argoCD tool and access its UI
 
 In this section, we will install the cilium tool as well the observability tool for cilium which is called Hubble
 
+### Cilium Installation 
+
+`cilium install`
+
+You can check the cilium status with the wait flag to see the full process of cilium pods creation and activation
+
+`cilium status --wait`
+
+
 ### Cilium CLI Installation
 
 `CILIUM_CLI_VERSION=$(curl -s https://raw.githubusercontent.com/cilium/cilium-cli/main/stable.txt)
@@ -137,17 +146,18 @@ sha256sum --check cilium-linux-${CLI_ARCH}.tar.gz.sha256sum
 sudo tar xzvfC cilium-linux-${CLI_ARCH}.tar.gz /usr/local/bin
 rm cilium-linux-${CLI_ARCH}.tar.gz{,.sha256sum}`
 
+
 ### Hubble Client
 
-`HUBBLE_VERSION=$(curl -s https://raw.githubusercontent.com/cilium/hubble/master/stable.txt)`
+`HUBBLE_VERSION=$(curl -s https://raw.githubusercontent.com/cilium/hubble/master/stable.txt)
+HUBBLE_ARCH=amd64
+if [ "$(uname -m)" = "aarch64" ]; then HUBBLE_ARCH=arm64; fi
+curl -L --fail --remote-name-all https://github.com/cilium/hubble/releases/download/$HUBBLE_VERSION/hubble-linux-${HUBBLE_ARCH}.tar.gz{,.sha256sum}
+sha256sum --check hubble-linux-${HUBBLE_ARCH}.tar.gz.sha256sum
+sudo tar xzvfC hubble-linux-${HUBBLE_ARCH}.tar.gz /usr/local/bin
+rm hubble-linux-${HUBBLE_ARCH}.tar.gz{,.sha256sum}`
 
-### Cilium Installation 
 
-`cilium install --version 1.17.2`
-
-You can check the cilium status with the wait flag to see the full process of cilium pods creation and activation
-
-`cilium status --wait`
 
 ### Hubble Enabling
 
@@ -155,12 +165,14 @@ You can simply enable hubble using the cilium CLI and then retype the status com
 
 `cilium hubble enable`
 
+`cilium hubble port-forward&`
+
+`hubble status`
+
+To access the hubble UI, 
+
+`cilium hubble disable`
 `cilium hubble enable --ui`
-
-`cilium status --wait`
-
-To access the hubble UI, you can either port forward or simply use this command
-
 `cilium hubble ui`
 
 
